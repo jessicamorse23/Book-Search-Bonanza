@@ -4,7 +4,7 @@ const db = require('./config/connection');
 // add apollo server
 // source code from NU Module 21 miniproject
 const { ApolloServer } = require("apollo-server-express");
-// const routes = require('./routes');
+const routes = require('./routes');
 const { typeDefs, resolvers } = require("./schemas");
 const { authMiddleware } = require("./utils/auth");
 
