@@ -4,7 +4,7 @@ const db = require('./config/connection');
 // add apollo server
 // source code from NU Module 21 miniproject
 const { ApolloServer } = require("apollo-server-express");
-const routes = require('./routes');
+// const routes = require('./routes');
 const { typeDefs, resolvers } = require("./schemas");
 const { authMiddleware } = require("./utils/auth");
 
@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-app.use(routes);
+// app.use(routes);
 
 db.once('open', () => {
   app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
