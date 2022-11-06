@@ -4,6 +4,35 @@ import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
+import {
+  ApolloCLient, 
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client"; 
+import { setContext } from "@apollo/client/link/context";
+
+const httpLink = createHttpLink({
+  uri: "/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem("id_token");
+  return {
+    headers: {
+      ...headers, 
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
+// think this should work with server.js client build 
+const client = new ApolloCLient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
+
 function App() {
   return (
     <Router>
@@ -29,3 +58,5 @@ function App() {
 }
 
 export default App;
+
+// https://www.apollographql.com/docs/react/api/link/apollo-link-http/
