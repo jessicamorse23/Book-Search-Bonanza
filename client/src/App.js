@@ -5,7 +5,7 @@ import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
 import {
-  ApolloCLient, 
+  ApolloClient, 
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
@@ -27,7 +27,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 // think this should work with server.js client build 
-const client = new ApolloCLient({
+const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
@@ -35,6 +35,7 @@ const client = new ApolloCLient({
 
 function App() {
   return (
+    <ApolloProvider client={client}>
     <Router>
       <>
         <Navbar />
@@ -54,6 +55,7 @@ function App() {
         </Routes>
       </>
     </Router>
+    </ApolloProvider>
   );
 }
 
