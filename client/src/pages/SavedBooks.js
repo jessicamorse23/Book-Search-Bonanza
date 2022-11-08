@@ -13,7 +13,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
-  let UserData = data?.me || {};
+  let userData = data?.me || {};
   console.log(userData);
   const [removeBook] = useMutation(REMOVE_BOOK);
 
